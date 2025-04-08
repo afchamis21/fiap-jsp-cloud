@@ -20,12 +20,6 @@ import java.util.Optional;
  * }</pre>
  */
 public class EnvLoader {
-
-    public static void main(String[] args) {
-        EnvLoader env = EnvLoader.getInstance();
-        String azureKey = env.getValue("AZURE_KEY").orElseThrow(() -> new RuntimeException("Azure Key is required run this application!"));
-        System.out.println(azureKey);
-    }
     /**
      * Instância singleton do EnvLoader.
      */
