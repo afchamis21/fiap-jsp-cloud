@@ -1,8 +1,6 @@
 package com.fiap.on.esoa.env;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -54,12 +52,18 @@ public class EnvLoader {
      * Linhas que começam com "#" ou que não possuem "=" são ignoradas.
      */
     private void loadEnv() {
-        try (BufferedReader br = new BufferedReader(new FileReader("./src/main/resources/.env"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.trim().startsWith("#") && line.contains("=")) {
-                    String[] parts = line.split("=", 2);
-                    env.put(parts[0].trim(), parts[1].trim());
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(".env")) {
+            if (input == null) {
+                throw new RuntimeException("> .env file not found in resources folder");
+            }
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(input))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    if (!line.trim().startsWith("#") && line.contains("=")) {
+                        String[] parts = line.split("=", 2);
+                        env.put(parts[0].trim(), parts[1].trim());
+                    }
                 }
             }
         } catch (IOException e) {

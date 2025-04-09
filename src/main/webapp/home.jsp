@@ -37,6 +37,20 @@
     </div>
 </section>
 
+<!-- <jsp:useBean id="wines" scope="request" type="java.util.List<com.fiap.on.esoa.domain.Wine>"/>
+    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+    <ul>
+        <c:forEach var="wine" items="${wines}">
+            <li>
+                <p>${wine.name}</p>
+                <p>${wine.year}</p>
+                <p>R$ ${wine.price}</p>
+    
+                <img src="${contextPath}/img?id=${wine.image}" alt="${wine.alt}" title="${wine.alt}"/>
+            </li>
+        </c:forEach>
+    </ul> -->
+
 <section class="produtos">
     <h1>Nossos Vinhos Premium</h1>
     <p>Explore nossa seleção criteriosamente selecionada de vinhos excepcionais de vinhedos renomados.</p>

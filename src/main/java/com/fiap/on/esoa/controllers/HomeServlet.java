@@ -1,5 +1,7 @@
 package com.fiap.on.esoa.controllers;
 
+import com.fiap.on.esoa.domain.Wine;
+import com.fiap.on.esoa.services.WineService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,11 +13,15 @@ import java.util.*;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
+    private final WineService wineService = new WineService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Acessando o servlet...");
+        List<Wine> wines = wineService.getStubWineList();
+        req.setAttribute("wines", wines);
+        req.getRequestDispatcher("/home.jsp").forward(req, resp);
 
-        List<Map<String, Object>> produtos = new ArrayList<>();
+/*         List<Map<String, Object>> produtos = new ArrayList<>();
 
         for (int i = 0; i < 6; i++) {
             Map<String, Object> produto = new HashMap<>();
@@ -27,8 +33,6 @@ public class HomeServlet extends HttpServlet {
             produtos.add(produto);
         }
 
-        req.setAttribute("produtos", produtos);
-
-        req.getRequestDispatcher("/home.jsp").forward(req, resp);
+        req.setAttribute("produtos", produtos); */
     }
 }
