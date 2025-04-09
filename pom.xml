@@ -55,10 +55,16 @@
       <version>3.0.1</version>
     </dependency>
 
-<!--     JDK Azure Blob Storage    -->
+    <!--     JDK Azure Blob Storage    -->
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-storage-blob</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>mssql-jdbc</artifactId>
+      <version>12.10.0.jre11</version>
     </dependency>
   </dependencies>
   <build>
