@@ -1,12 +1,14 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         version="3.0">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>com.fiap.on.esoa.controllers.HomeServlet</servlet-class>
+  </servlet>
 
-  <welcome-file-list>
-    <welcome-file>home</welcome-file>
-  </welcome-file-list>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+
 </web-app>
-
