@@ -1,4 +1,4 @@
-<%@ page import="java.util.Map" %>
+<%@ page import="com.fiap.on.esoa.domain.Wine" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: afcha
@@ -6,16 +6,17 @@
   Time: 22:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
     <meta charset="UTF-8">
     <title>Vinheria Agnello</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" href="${contextPath}/css/styles.css">
 </head>
 <body>
-
 <header class="header">
     <div class="logo">🍷 Vinheria Agnello</div>
     <nav>
@@ -33,56 +34,43 @@
         <a class="btn" href="#">Nossa Coleção</a>
     </div>
     <div class="hero-img">
-        <img src="${pageContext.request.contextPath}/images/produtos.svg" alt="Imagem destaque">
+        <img src="${contextPath}/images/produtos.svg" alt="Imagem destaque">
     </div>
 </section>
-
-<!-- <jsp:useBean id="wines" scope="request" type="java.util.List<com.fiap.on.esoa.domain.Wine>"/>
-    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-    <ul>
-        <c:forEach var="wine" items="${wines}">
-            <li>
-                <p>${wine.name}</p>
-                <p>${wine.year}</p>
-                <p>R$ ${wine.price}</p>
-    
-                <img src="${contextPath}/img?id=${wine.image}" alt="${wine.alt}" title="${wine.alt}"/>
-            </li>
-        </c:forEach>
-    </ul> -->
 
 <section class="produtos">
     <h1>Nossos Vinhos Premium</h1>
     <p>Explore nossa seleção criteriosamente selecionada de vinhos excepcionais de vinhedos renomados.</p>
     <div class="produtos-grid">
-        <%
-            List<Map<String, Object>> produtos = (List<Map<String, Object>>) request.getAttribute("produtos");
-            if (produtos != null) {
-                for (Map<String, Object> produto : produtos) {
-        %>
-        <div class="produto-card">
-            <img src="<%= produto.get("urlImagem") %>" alt="Vinho">
-            <h3><%= produto.get("nomeProduto") %></h3>
-            <span class="ano"><%= produto.get("descricao") %></span>
-            <span class="preco">R$<%= String.format("%.2f", produto.get("preco")) %></span>
-            <div class="estrelas">
-                <%
-                    int nota = (int) produto.get("nota");
-                    for (int i = 0; i < nota; i++) { out.print("★"); }
-                    for (int i = nota; i < 5; i++) { out.print("☆"); }
-                %>
-            </div>
-            <button class="btn">Adicionar ao Carrinho</button>
-        </div>
-        <%
-            }
-        } else {
-        %>
-        <p>Nenhum produto encontrado.</p>
-        <%
-            }
-        %>
-
+        <jsp:useBean id="wines" scope="request" type="java.util.List<com.fiap.on.esoa.domain.Wine>" />
+        <c:choose>
+            <c:when test="${not empty wines}">
+                <c:forEach var="wine" items="${wines}">
+                    <div class="produto-card">
+                        <img src="${contextPath}/img?id=${wine.image}" alt="${wine.alt}" title="${wine.alt}" />
+                        <h3>${wine.name}</h3>
+                        <span class="ano">${wine.year}</span>
+                        <span class="preco">R$ ${wine.price}</span>
+                        <div class="estrelas">
+                            <c:forEach var="i" begin="1" end="5">
+                                <c:choose>
+                                    <c:when test="${i <= wine.rating}">
+                                        ★
+                                    </c:when>
+                                    <c:otherwise>
+                                        ☆
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </div>
+                        <button class="btn">Adicionar ao Carrinho</button>
+                    </div>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <p>Nenhum produto encontrado.</p>
+            </c:otherwise>
+        </c:choose>
     </div>
     <a class="btn ver-mais" href="#">Ver todos os Produtos</a>
 </section>

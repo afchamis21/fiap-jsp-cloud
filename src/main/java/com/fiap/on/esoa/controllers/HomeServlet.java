@@ -20,19 +20,5 @@ public class HomeServlet extends HttpServlet {
         List<Wine> wines = wineService.getStubWineList();
         req.setAttribute("wines", wines);
         req.getRequestDispatcher("/home.jsp").forward(req, resp);
-
-/*         List<Map<String, Object>> produtos = new ArrayList<>();
-
-        for (int i = 0; i < 6; i++) {
-            Map<String, Object> produto = new HashMap<>();
-            produto.put("nomeProduto", "Château Elegance " + (2020 + i));
-            produto.put("preco", 89.90 + i * 10); // mockando preços diferentes
-            produto.put("nota", (i % 5) + 1); // notas de 1 a 5
-            produto.put("descricao", "Vinho da safra " + (2020 + i));
-            produto.put("urlImagem", req.getContextPath() + "/images/produtos.svg"); // usando caminho relativo
-            produtos.add(produto);
-        }
-
-        req.setAttribute("produtos", produtos); */
     }
 }
