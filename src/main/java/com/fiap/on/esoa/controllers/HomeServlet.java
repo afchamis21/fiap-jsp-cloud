@@ -16,9 +16,19 @@ public class HomeServlet extends HttpServlet {
     private final WineService wineService = new WineService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Acessando o servlet...");
-        List<Wine> wines = wineService.getStubWineList();
+        List<Wine> wines = wineService.getWineList();
+
+        Map<String, List<Wine>> groupedWines = new HashMap<>();
+        for (Wine wine: wines) {
+            if (!groupedWines.containsKey(wine.getCountry())) {
+                groupedWines.put(wine.getCountry(), new ArrayList<>());
+            }
+
+            groupedWines.get(wine.getCountry()).add(wine);
+        }
+
         req.setAttribute("wines", wines);
+        req.setAttribute("groupedWines", groupedWines);
         req.getRequestDispatcher("/home.jsp").forward(req, resp);
     }
 }

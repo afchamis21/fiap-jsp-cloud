@@ -5,6 +5,10 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <listener>
+    <listener-class>com.fiap.on.esoa.dao.DBDriverListener</listener-class>
+  </listener>
+
   <welcome-file-list>
     <welcome-file>home</welcome-file>
   </welcome-file-list>

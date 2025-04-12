@@ -2,8 +2,12 @@ package com.fiap.on.esoa.dao;
 
 import com.fiap.on.esoa.domain.Wine;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WineDao extends BaseDao {
 
@@ -20,5 +24,23 @@ public class WineDao extends BaseDao {
         wine.setPrice(rs.getBigDecimal("Price"));
 
         return wine;
+    }
+
+    public List<Wine> listAll() {
+        try {
+            Connection conn = super.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select Id, Maker, Name, Image, Alt, Country, Grape, Price, Rating, Year from dbo.Wine");
+            ResultSet rs = ps.executeQuery();
+
+            List<Wine> wines = new ArrayList<>();
+            while (rs.next()) {
+                wines.add(mapResultSetToWine(rs));
+            }
+
+            return wines;
+        } catch (SQLException e) {
+            System.out.println("Error listing all wines: " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
 }
