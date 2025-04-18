@@ -41,7 +41,6 @@ body {
 
 .hero-img img {
     margin-top: 2rem;
-    width: 600px;
 }
 
 .hero-text{
@@ -75,6 +74,10 @@ body {
     height: auto;
 }
 
+.wine-titles{
+    display: flex;
+    flex-direction: column;
+}
 
 .estrelas {
     color: gold;
@@ -118,3 +121,20 @@ body {
     display: flex;
     align-items: center;
 }
+
+.wine-country {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.bandeira {
+    width: 24px;
+    height: 18px;
+    margin-right: 6px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
