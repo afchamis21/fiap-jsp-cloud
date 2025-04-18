@@ -1,5 +1,6 @@
 package com.fiap.on.esoa.services;
 
+import com.fiap.on.esoa.dao.WineDao;
 import com.fiap.on.esoa.domain.Wine;
 
 import java.math.BigDecimal;
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WineService {
+    private final WineDao wineDao = new WineDao();
+
     public List<Wine> getStubWineList() {
         List<Wine> wines = new ArrayList<>();
         wines.add(new Wine(
@@ -61,7 +64,8 @@ public class WineService {
     }
 
     public List<Wine> getWineList() {
-        // TODO implement
-        return new ArrayList<>();
+        List<Wine> wines = wineDao.listAll();
+        System.out.println("> Total wines found: " + wines.size());
+        return wines;
     }
 }
