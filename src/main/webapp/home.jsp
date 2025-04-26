@@ -10,11 +10,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <c:set var="contextPath" value="${pageContext.request.contextPath}" />
     <meta charset="UTF-8">
     <title>Vinheria Agnello</title>
     <link rel="stylesheet" href="${contextPath}/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="header">
@@ -57,7 +60,7 @@
                 </c:when>
                 <c:when test="${wine.country == 'África do Sul'}">
                     <c:set var="countryCode" value="za" />
-                </c:when>1'
+                </c:when>
                 <c:when test="${wine.country == 'França'}">
                     <c:set var="countryCode" value="fr" />
                 </c:when>
@@ -111,7 +114,7 @@
                 String imagemTipo = imagensTipos[i];
         %>
         <div class="categoria-card">
-            <img width="250" height="250" src="${contextPath}/images/wines/<%= imagemTipo %>" alt="<%= tipo %>">
+            <img src="${contextPath}/img?id=<%=imagemTipo%>" alt="<%= tipo %>">
             <span><%= tipo %></span>
             <button class="btn">Explorar</button>
         </div>

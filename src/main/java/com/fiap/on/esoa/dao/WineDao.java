@@ -22,6 +22,7 @@ public class WineDao extends BaseDao {
         wine.setRating(rs.getInt("Rating"));
         wine.setYear(rs.getInt("Year"));
         wine.setPrice(rs.getBigDecimal("Price"));
+        wine.setCountry(rs.getString("Country"));
 
         return wine;
     }
